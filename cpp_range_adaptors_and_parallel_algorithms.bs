@@ -267,16 +267,8 @@ We propose to do (1).
 
 <tr>
 <td>`as_const`
+`as_rvalue`
 <td>Contig
-<td>
-<td>
-<td>
-<td>
-<td>
-
-<tr>
-<td>`as_rvalue`
-<td>
 <td>
 <td>
 <td>
@@ -312,16 +304,8 @@ We propose to do (1).
 
 <tr>
 <td>`keys`
+`values`
 <td>RA
-<td>
-<td>
-<td>
-<td>
-<td>
-
-<tr>
-<td>`values`
-<td>
 <td>
 <td>
 <td>
@@ -348,19 +332,11 @@ We propose to do (1).
 
 <tr>
 <td>`zip`
+`zip_transform`
 <td>RA
 <td>
 <td>
 <td>Yes
-<td>
-<td>
-
-<tr>
-<td>`zip_transform`
-<td>
-<td>
-<td>
-<td>
 <td>
 <td>
 
@@ -420,6 +396,7 @@ We propose to do (1).
 
 <tr>
 <td>`join`
+`join_with`
 <td>BiDi
 <td>Yes
 <td>
@@ -428,31 +405,14 @@ We propose to do (1).
 <td>?
 
 <tr>
-<td>`join_with`
-<td>
-<td>
-<td>
-<td>
-<td>
-<td>
-
-<tr>
 <td>`split`
+`lazy_split`
 <td>Forward
 <td>Yes
 <td>Yes
 <td>Yes
 <td>Yes
 <td>Non-Trivial Grouping
-
-<tr>
-<td>`lazy_split`
-<td>
-<td>
-<td>
-<td>
-<td>
-<td>
 
 <tr>
 <td>`chunk`
@@ -474,21 +434,13 @@ We propose to do (1).
 
 <tr>
 <td>`adjacent`
+`adjacent_transform`
 <td>RA
 <td>Yes
 <td>
 <td>Yes
 <td>Yes
 <td>Trivial Grouping
-
-<tr>
-<td>`adjacent_transform`
-<td>
-<td>
-<td>
-<td>
-<td>
-<td>
 
 <tr>
 <td>`slide`
