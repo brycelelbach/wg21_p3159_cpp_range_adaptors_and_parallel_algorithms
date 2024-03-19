@@ -1977,7 +1977,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">D3159R1<br>C++ Range Adaptors and Parallel Algorithms</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Proposal, <time class="dt-updated" datetime="2024-03-17">2024-03-17</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Proposal, <time class="dt-updated" datetime="2024-03-18">2024-03-18</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt class="editor">Author:
@@ -2159,10 +2159,14 @@ dfn > a.self-link::before      { content: "#"; }
 <c- n>for_each</c-><c- p>(</c-><c- n>start</c-><c- p>,</c-> <c- n>end</c-><c- p>,</c-> <c- n>f</c-><c- p>);</c->
 </pre>
    <p>However, if these range adaptors adapt a range that contained a non-trivial removal or grouping adaptor, then they become non-trivial as well, and need to be handled with an in-place stream compaction pass.</p>
-   <p>There’s two approaches to handling trivial removals and groupings:
-0) Always insert an in-place scan pass and don’t handle them during work distribution. This has the advantage of simplicity.
-1) Only insert in-place scan pass if there is a prior non-trivial removal or grouping, and otherwise handle it during work distribution. This requires maintaining some state when reconstructing the range, but is more efficient.</p>
-   <p>We propose to do (1).</p>
+   <p>There’s two approaches to handling trivial removals and groupings:</p>
+   <ol>
+    <li data-md>
+     <p>Always insert an in-place scan pass and don’t handle them during work distribution. This has the advantage of simplicity.</p>
+    <li data-md>
+     <p>Only insert in-place scan pass if there is a prior non-trivial removal or grouping, and otherwise handle it during work distribution. This requires maintaining some state when reconstructing the range, but is more efficient.</p>
+   </ol>
+   <p>We propose to do (2).</p>
    <h2 class="heading settled" data-level="3" id="cheatsheet"><span class="secno">3. </span><span class="content">Cheatsheet</span><a class="self-link" href="#cheatsheet"></a></h2>
    <table>
     <tbody>
