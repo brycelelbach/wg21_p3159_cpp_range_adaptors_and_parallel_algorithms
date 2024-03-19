@@ -327,7 +327,7 @@ We propose to do (2).
 <td>RA
 <td>
 <td>
-<td>
+<td>Yes
 <td>
 <td>?
 
