@@ -211,10 +211,11 @@ for_each(start, end, f);
 However, if these range adaptors adapt a range that contained a non-trivial removal or grouping adaptor, then they become non-trivial as well, and need to be handled with an in-place stream compaction pass.
 
 There's two approaches to handling trivial removals and groupings:
-0) Always insert an in-place scan pass and don't handle them during work distribution. This has the advantage of simplicity.
-1) Only insert in-place scan pass if there is a prior non-trivial removal or grouping, and otherwise handle it during work distribution. This requires maintaining some state when reconstructing the range, but is more efficient.
 
-We propose to do (1).
+1. Always insert an in-place scan pass and don't handle them during work distribution. This has the advantage of simplicity.
+2. Only insert in-place scan pass if there is a prior non-trivial removal or grouping, and otherwise handle it during work distribution. This requires maintaining some state when reconstructing the range, but is more efficient.
+
+We propose to do (2).
 
 # Cheatsheet # {#cheatsheet}
 
