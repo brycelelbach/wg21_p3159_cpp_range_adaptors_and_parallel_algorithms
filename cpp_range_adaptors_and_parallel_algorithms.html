@@ -1977,7 +1977,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">D3159R1<br>C++ Range Adaptors and Parallel Algorithms</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Proposal, <time class="dt-updated" datetime="2024-03-18">2024-03-18</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Proposal, <time class="dt-updated" datetime="2024-05-06">2024-05-06</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt class="editor">Author:
@@ -2078,11 +2078,11 @@ dfn > a.self-link::before      { content: "#"; }
                <c- k>if</c-> <c- p>(</c-><c- o>!</c-><c- n>f</c-><c- p>(</c-><c- n>x</c-><c- p>))</c-> <c- k>return</c-> <c- n>tombstone</c-><c- p>(</c-><c- n>x</c-><c- p>);</c-> <c- k>else</c-> <c- k>return</c-> <c- n>nullopt</c-><c- p>;</c->
              <c- p>}),</c->
        <c- p>[</c-><c- n>g</c-><c- p>]</c-> <c- p>(</c-><c- k>auto</c-> <c- n>l</c-><c- p>,</c-> <c- k>auto</c-> <c- n>r</c-><c- p>)</c-> <c- p>{</c->
-         <c- k>if</c-> <c- p>(</c-><c- n>l</c-> <c- o>&amp;&amp;</c-> <c- n>r</c-><c- p>)</c-> <c- k>return</c-> <c- n>g</c-><c- p>(</c-><c- n>l</c-><c- p>,</c-> <c- n>r</c-><c- p>);</c->
+         <c- k>if</c-> <c- p>(</c-><c- n>l</c-> <c- o>&amp;&amp;</c-> <c- n>r</c-><c- p>)</c-> <c- k>return</c-> <c- n>g</c-><c- p>(</c-><c- o>*</c-><c- n>l</c-><c- p>,</c-> <c- o>*</c-><c- n>r</c-><c- p>);</c->
          <c- k>else</c-> <c- k>if</c-> <c- p>(</c-><c- n>l</c-><c- p>)</c-> <c- k>return</c-> <c- n>l</c-><c- p>;</c->
          <c- k>else</c-> <c- k>if</c-> <c- p>(</c-><c- n>r</c-><c- p>)</c-> <c- k>return</c-> <c- n>r</c-><c- p>;</c->
-         <c- k>else</c->        <c- k>return</c-> <c- p>{};</c->
-       <c- p>});</c->
+         <c- k>else</c->        <c- k>return</c-> <c- n>nullopt</c-><c- p>;</c->
+       <c- p>}).</c-><c- n>value_or</c-><c- p>(</c-><c- n>T</c-><c- p>{});</c->
 </pre>
    <p>However, not all adaptors and parallel algorithms can be wrapped to ignore tombstones. For example, some adaptors like <code class="highlight"><c- n>adjacent</c-></code> and <code class="highlight"><c- n>enumerate</c-></code> are position-aware, meaning they either access neighboring elements or care about the position of the element in the range. If tombstones are present, they will throw off the position logic. <code class="highlight"><c- n>adjacent</c-></code> needs to give you adjacent non-tombstone elements and <code class="highlight"><c- n>enumerate</c-></code> needs to not count the tombstones, which would require the sort of lazy filtering logic that we seek to avoid.</p>
    <p>To defer removal of tombstones, the optimizing kernel builder must keep track of whether the reconstructed range is tombstoned as it recurses through it. If it encounters an operation that requires tombstoning, it must mark the reconstructed range as tombstoned. If it encounters an operation that cannot be wrapped to ignore tombstones, then it must insert a stream compaction pass and mark the reconstructed range as untombstoned. Maintaining this state adds complexity. A pipeline may enter and exit the tombstone state multiple times.</p>
